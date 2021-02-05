@@ -9,25 +9,31 @@
 </template>
 
 <script>
-import { findLast, has } from "lodash-es";
-import EmptyShell from "./shells/EmptyShell";
+import { findLast, has } from 'lodash-es';
+import EmptyShell from './shells/EmptyShell';
 
 export default {
-  name: "App",
+  name: 'App',
   data() {
     return {
-      shell: null
+      shell: null,
     };
   },
   watch: {
     $route: {
       handler() {
         this.shell =
-          findLast(this.$route.matched, route => has(route, "meta.shell"))?.meta
+          findLast(this.$route.matched, route => has(route, 'meta.shell'))?.meta
             ?.shell ?? EmptyShell;
       },
-      immediate: true
-    }
-  }
+      immediate: true,
+    },
+  },
 };
 </script>
+
+<style>
+  html, body {
+    padding: 0 !important;
+  }
+</style>

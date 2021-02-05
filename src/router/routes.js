@@ -1,50 +1,72 @@
-import Home from "../pages/HomePage";
+import MainShell from '../shells/MainShell';
+import EmptyShell from '../shells/EmptyShell';
+
+import LoginPage from '../pages/auth/LoginPage';
+import RegisterPage from '../pages/auth/RegisterPage';
+import Home from '../pages/HomePage';
+
 // import AllOrders from "../pages/accounter/AllOrders";
-import SalesReport from "../pages/accounter/SalesReport";
-import Enumuration from "../pages/accounter/Enumuration";
-import MainShell from "../shells/MainShell";
+import SalesReport from '../pages/accounter/SalesReport';
+import Enumuration from '../pages/accounter/Enumuration';
+
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
+    path: '/',
+    name: 'Home',
     meta: {
-      shell: MainShell
+      shell: MainShell,
     },
-    component: Home
+    component: Home,
   },
   {
-    path: "/about",
-    name: "About",
+    path: '/about',
+    name: 'About',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../pages/OperatorPage.vue")
+      import(/* webpackChunkName: "about" */ '../pages/OperatorPage.vue'),
   },
   {
-    path: "/accounter/sales-report",
-    name: "top-menu-accounter-sales",
+    path: '/login',
+    name: 'login',
     meta: {
-      shell: MainShell
+      shell: EmptyShell,
     },
-    component: SalesReport
+    component: LoginPage,
   },
   {
-    path: "/accounter/all-orders",
-    name: "top-menu-accounter-orders",
+    path: '/register',
+    name: 'register',
     meta: {
-      shell: MainShell
-    }
+      shell: EmptyShell,
+    },
+    component: RegisterPage,
+  },
+  {
+    path: '/accounter/sales-report',
+    name: 'top-menu-accounter-sales',
+    meta: {
+      shell: MainShell,
+    },
+    component: SalesReport,
+  },
+  {
+    path: '/accounter/all-orders',
+    name: 'top-menu-accounter-orders',
+    meta: {
+      shell: MainShell,
+    },
     // component: AllOrders
   },
   {
-    path: "/accounter/enumeration",
-    name: "top-menu-accounter-enumeration",
+    path: '/accounter/enumeration',
+    name: 'top-menu-accounter-enumeration',
     meta: {
-      shell: MainShell
+      shell: MainShell,
     },
-    component: Enumuration
-  }
+    component: Enumuration,
+  },
 ];
 export default routes;
