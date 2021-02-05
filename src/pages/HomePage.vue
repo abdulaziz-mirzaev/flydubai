@@ -1370,7 +1370,20 @@
 </template>
 
 <script>
+import { edit, getOne } from "../services/client.services";
+
 export default {
-  name: "Home"
+  name: "Home",
+  async created() {
+    await edit("client", 156, {
+      last_name: "updatedAzimjon2LastName"
+    });
+    // await createClient({
+    //   first_name: "Azimjon2",
+    //   last_name: "Toirov2"
+    // });
+    await getOne("client", 156);
+    // await deleteClient(133);
+  }
 };
 </script>
