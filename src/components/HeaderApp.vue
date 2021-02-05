@@ -224,7 +224,7 @@
               <div class="ml-2 overflow-hidden">
                 <div class="flex items-center">
                   <a href="javascript:;" class="font-medium truncate mr-5"
-                    >Tom Cruise</a
+                  >Tom Cruise</a
                   >
                   <div class="text-xs text-gray-500 ml-auto whitespace-nowrap">
                     06:05 AM
@@ -251,7 +251,7 @@
               <div class="ml-2 overflow-hidden">
                 <div class="flex items-center">
                   <a href="javascript:;" class="font-medium truncate mr-5"
-                    >Robert De Niro</a
+                  >Robert De Niro</a
                   >
                   <div class="text-xs text-gray-500 ml-auto whitespace-nowrap">
                     01:10 PM
@@ -278,7 +278,7 @@
               <div class="ml-2 overflow-hidden">
                 <div class="flex items-center">
                   <a href="javascript:;" class="font-medium truncate mr-5"
-                    >Russell Crowe</a
+                  >Russell Crowe</a
                   >
                   <div class="text-xs text-gray-500 ml-auto whitespace-nowrap">
                     06:05 AM
@@ -305,7 +305,7 @@
               <div class="ml-2 overflow-hidden">
                 <div class="flex items-center">
                   <a href="javascript:;" class="font-medium truncate mr-5"
-                    >Leonardo DiCaprio</a
+                  >Leonardo DiCaprio</a
                   >
                   <div class="text-xs text-gray-500 ml-auto whitespace-nowrap">
                     05:09 AM
@@ -332,7 +332,7 @@
               <div class="ml-2 overflow-hidden">
                 <div class="flex items-center">
                   <a href="javascript:;" class="font-medium truncate mr-5"
-                    >Kevin Spacey</a
+                  >Kevin Spacey</a
                   >
                   <div class="text-xs text-gray-500 ml-auto whitespace-nowrap">
                     01:10 PM
@@ -399,9 +399,10 @@
               <a
                 href=""
                 class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"
+                @click="onLogout"
               >
                 <i data-feather="toggle-right" class="w-4 h-4 mr-2"></i>
-                Logout
+                Выйти
               </a>
             </div>
           </div>
@@ -414,7 +415,12 @@
 
 <script>
 export default {
-  name: "HeaderApp"
+  name: 'HeaderApp',
+  methods: {
+    onLogout() {
+      this.$store.dispatch('auth/logout');
+    },
+  },
 };
 </script>
 

@@ -1,14 +1,14 @@
-import axios from "axios";
+import axios from 'axios';
 
-export const request = async ({ url, method, data = {} }) => {
+export const request = async ({ url, method, data = {}, token = null }) => {
   const response = await axios.request({
     url: `${url}`,
     method: method,
-    baseURL: "http://10.10.3.30:9090",
+    baseURL: 'http://10.10.3.30:9090',
     headers: {
-      Authorization: "Bearer O8jPJnJN7f"
+      Authorization: `Bearer ${token}`,
     },
-    data: data
+    data: data,
   });
 
   // if (response.statusText !== "OK") {

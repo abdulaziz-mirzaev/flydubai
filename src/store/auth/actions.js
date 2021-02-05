@@ -1,18 +1,16 @@
-import { signIn, signUp } from "../../services/auth.service";
-import { getOne } from "../../services/api.service";
+import { signIn, signUp } from '../../services/auth.service';
 
 export async function login({ commit }, fromData) {
-  const { token, user_id } = await signIn(fromData);
-  const user = await getOne("client", user_id);
-  commit("login", { user, token });
+  const { data: { token, user_id } } = await signIn(fromData);
+  commit('login', { token, user_id });
 }
 
 export async function register({ commit }, formData) {
-  const { user_id } = await signUp(formData);
-  const user = await getOne("client", user_id);
-  commit("register", user);
+  const { data: { user_id, token } } = await signUp(formData);
+  console.log(token, user_id);
+  commit('register', { token, user_id });
 }
 
 export function logout({ commit }) {
-  commit("logout");
+  commit('logout');
 }

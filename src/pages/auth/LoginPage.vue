@@ -5,21 +5,17 @@
         <!-- BEGIN: Login Info -->
         <div class="hidden xl:flex flex-col min-h-screen">
           <a href="" class="-intro-x flex items-center pt-5">
-            <img alt="Midone Tailwind HTML Admin Template" class="w-6" src="dist/images/logo.svg">
-            <span class="text-white text-lg ml-3"> Mid<span class="font-medium">One</span> </span>
+            <img alt="Fly Dubai" class="w-24" src="@/assets/images/flydubai.svg">
           </a>
           <div class="my-auto">
             <img alt="Midone Tailwind HTML Admin Template" class="-intro-x w-1/2 -mt-16"
-                 src="dist/images/illustration.svg">
+                 src="@/assets/images/illustration.svg">
             <div class="-intro-x text-white font-medium text-4xl leading-tight mt-10">
-              A few more clicks to
+              Несколько шагов для того, чтобы
               <br>
-              sign in to your account.
+              войти на ваш аккаунт.
             </div>
-            <div class="-intro-x mt-5 text-lg text-white dark:text-gray-500">Manage all your e-commerce accounts in one
-              place
-            </div>
-          </div>
+          </div>L
         </div>
         <!-- END: Login Info -->
 
@@ -47,4 +43,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style>
+  html, body {
+    padding: 0 !important;
+  }
+</style>

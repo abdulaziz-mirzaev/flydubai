@@ -3,5 +3,5 @@ export function isAuthenticated(state) {
 }
 
 export function userId(state) {
-  return state.user.id;
+  return state.user_id;
 }

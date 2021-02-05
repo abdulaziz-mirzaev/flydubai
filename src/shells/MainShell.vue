@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="layout-padding">
     <mobile-menu-app />
     <!-- END: Mobile Menu -->
     <!-- BEGIN: Top Bar -->
@@ -19,18 +19,22 @@
 </template>
 
 <script>
-import MobileMenuApp from "../components/MobileMenuApp";
-import HeaderApp from "../components/HeaderApp";
-import NavbarApp from "../components/NavbarApp";
+import MobileMenuApp from '../components/MobileMenuApp';
+import HeaderApp from '../components/HeaderApp';
+import NavbarApp from '../components/NavbarApp';
 
 export default {
-  name: "MainShell",
+  name: 'MainShell',
   components: {
     MobileMenuApp,
     HeaderApp,
-    NavbarApp
-  }
+    NavbarApp,
+  },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+  .layout-padding {
+    padding: .75rem 2rem
+  }
+</style>

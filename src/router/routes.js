@@ -3,7 +3,7 @@ import EmptyShell from '../shells/EmptyShell';
 
 import LoginPage from '../pages/auth/LoginPage';
 import RegisterPage from '../pages/auth/RegisterPage';
-import Home from '../pages/HomePage';
+import HomePage from '../pages/HomePage';
 
 // import AllOrders from "../pages/accounter/AllOrders";
 import SalesReport from '../pages/accounter/SalesReport';
@@ -13,11 +13,11 @@ import Enumuration from '../pages/accounter/Enumuration';
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     meta: {
       shell: MainShell,
     },
-    component: Home,
+    component: HomePage,
   },
   {
     path: '/about',
