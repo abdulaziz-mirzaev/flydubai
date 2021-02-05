@@ -47,4 +47,3 @@ const leave = (el, done) => {
     Velocity(el, "slideUp", { duration: 300 }, { complete: done });
 };
 export { nestedMenu, linkTo, enter, leave };
-//# sourceMappingURL=index.js.map
