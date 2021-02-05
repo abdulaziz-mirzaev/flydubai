@@ -1,4 +1,4 @@
-import { request } from "./core.services";
+import { request } from "./core.service";
 
 const getInfo = async resourceName =>
   request({ url: `${resourceName}/info`, method: "get" });
