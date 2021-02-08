@@ -397,9 +397,8 @@
             </div>
             <div class="p-2 border-t border-theme-40 dark:border-dark-3">
               <a
-                href=""
-                class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"
-                @click="onLogout"
+                class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md cursor-pointer"
+                @click.prevent="onLogout"
               >
                 <i data-feather="toggle-right" class="w-4 h-4 mr-2"></i>
                 Выйти
@@ -417,8 +416,9 @@
 export default {
   name: 'HeaderApp',
   methods: {
-    onLogout() {
-      this.$store.dispatch('auth/logout');
+    async onLogout() {
+      await this.$store.dispatch('auth/logout');
+      await this.$router.push({ name: 'login' });
     },
   },
 };
