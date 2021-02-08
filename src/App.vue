@@ -11,6 +11,8 @@
 <script>
 import { findLast, has } from 'lodash-es';
 import EmptyShell from './shells/EmptyShell';
+import {nestedMenu} from "./menu/menu-config";
+import menu from "./menu";
 
 export default {
   name: 'App',
@@ -18,6 +20,14 @@ export default {
     return {
       shell: null,
     };
+  },
+  computed: {
+    formattedMenu() {
+      return nestedMenu(menu,this.$route)
+    }
+  },
+  created() {
+    console.log(this.formattedMenu);
   },
   watch: {
     $route: {
