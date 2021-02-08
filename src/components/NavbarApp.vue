@@ -81,11 +81,29 @@ export default {
   components: { ActivityIcon, ChevronDownIcon, ZapIcon },
   data() {
     return {
-      menus: nestedMenu(menu, this.$route)
+      menu,
+    }
+  },
+  computed: {
+    role() {
+      return this.$store.getters["auth/userRole"];
+    },
+    menuByRole() {
+      if ( this.role !== 'admin' ) {
+        const roledMenu = this.menu.filter((menu) => menu.name === this.role);
+        return roledMenu[0].subMenu;
+      }
+      return menu;
+    },
+    menus() {
+      return nestedMenu(this.menuByRole, this.$route)
     }
   },
   methods: {
     linkTo
+  },
+  created() {
+    console.log(this.role);
   }
 };
 </script>
