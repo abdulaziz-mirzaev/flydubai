@@ -42,18 +42,8 @@ const routes = [
       shell: MainShell,
       protected: true,
     },
-    component: Client,
+    component: () => import('../pages/main/client/Client'),
   },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ '../pages/OperatorPage.vue'),
-  },
-
   //region Auth Pages
   {
     path: '/login',
