@@ -8,6 +8,7 @@ import HomePage from '../pages/HomePage';
 // import AllOrders from "../pages/accounter/AllOrders";
 import SalesReport from '../pages/accounter/SalesReport';
 import Enumuration from '../pages/accounter/Enumuration';
+import Client from '../pages/main/client/Client';
 
 
 const routes = [
@@ -19,6 +20,15 @@ const routes = [
       protected: true,
     },
     component: HomePage,
+  },
+  {
+    path: '/client',
+    name: 'client',
+    meta: {
+      shell: MainShell,
+      protected: true,
+    },
+    component: Client,
   },
   {
     path: '/about',

@@ -55,7 +55,7 @@ const menu = [
             },
             {
                 icon: "UsersIcon",
-                pageName: "clients",
+                pageName: "client",
                 title: "Клиенты",
                 ignore: true,
             },
