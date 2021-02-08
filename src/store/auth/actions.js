@@ -19,8 +19,8 @@ export async function register({ commit }, formData) {
   store.dispatch('common/clearError', {}, { root: true });
   try {
     const { data: { user_id, token } } = await signUp(formData);
-    const { data: { username, email, role } } = await me(token);
-    commit('register', { token, user_id, username, email, role });
+    const { data: { username, email } } = await me(token);
+    commit('register', { token, user_id, username, email });
   } catch (e) {
     store.dispatch('common/setLoading', false, { root: true });
     store.dispatch('common/setError', e.response.data, { root: true });

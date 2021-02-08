@@ -114,6 +114,14 @@ export default {
             await this.$router.push({ name: 'accounter-orders' });
             break;
 
+          case 'cashier':
+            await this.$router.push({ name: 'cashier' });
+            break;
+
+          case 'director':
+            await this.$router.push({ name: 'director' });
+            break;
+
           default:
             await this.$router.push({ name: 'home' });
             break;

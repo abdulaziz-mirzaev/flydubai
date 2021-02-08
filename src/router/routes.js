@@ -14,7 +14,7 @@ const routes = [
     name: 'home',
     meta: {
       shell: MainShell,
-      protected: true,
+      protected: false,
     },
     component: HomePage,
     beforeEnter: (to, from, next) => {
@@ -26,6 +26,14 @@ const routes = [
         });
       }
     },
+  },
+  {
+    path: '/client',
+    name: 'client',
+    meta: {
+      shell: MainShell,
+    },
+    component: () => import('../pages/client/ClientPage'),
   },
 
   //region Auth Pages

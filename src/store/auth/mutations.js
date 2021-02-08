@@ -3,16 +3,16 @@ export function login(state, { token, user_id, username, email, role }) {
   state.user_id = user_id;
   state.username = username;
   state.email = email;
-  state.role = role;
+  state.role = role || 'client';
   state.isAuthenticated = true;
 }
 
-export function register(state, { token, user_id, username, email, role }) {
+export function register(state, { token, user_id, username, email }) {
   state.token = token;
   state.user_id = user_id;
   state.username = username;
   state.email = email;
-  state.role = role;
+  state.role = 'client';
   state.isAuthenticated = true;
 }
 
