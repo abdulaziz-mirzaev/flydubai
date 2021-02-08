@@ -22,6 +22,8 @@
 import MobileMenuApp from '../components/MobileMenuApp';
 import HeaderApp from '../components/HeaderApp';
 import NavbarApp from '../components/NavbarApp';
+import {nestedMenu} from "../menu/menu-config";
+import menu from "../menu";
 
 export default {
   name: 'MainShell',
@@ -29,6 +31,14 @@ export default {
     MobileMenuApp,
     HeaderApp,
     NavbarApp,
+  },
+  computed: {
+    formattedMenu() {
+      return nestedMenu(menu,this.$route)
+    }
+  },
+  created() {
+    console.log(this.formattedMenu);
   },
 };
 </script>

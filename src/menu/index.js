@@ -1,53 +1,53 @@
 const menu = [
     {
         icon: "HomeIcon",
-        pageName: "top-menu-dashboard",
+        pageName: "home",
         title: "Главная страница",
     },
     {
         icon: "BoxIcon",
-        pageName: "top-menu-menu-layout",
+        pageName: "menu-layout",
         title: "Оператор",
         name: 'operator',
         subMenu: [
             {
                 icon: "BoxIcon",
-                pageName: "top-menu-menu-",
+                pageName: "menu-",
                 title: "Заявки",
                 subMenu: [
                     {
                         icon: "",
-                        pageName: "top-menu-all-orders",
+                        pageName: "all-orders",
                         title: "Все заявки",
                         ignore: true,
                     },
                     {
                         icon: "",
-                        pageName: "top-menu-ticket",
+                        pageName: "ticket",
                         title: "Билеты",
                         ignore: true,
                     },
                     {
                         icon: "",
-                        pageName: "top-menu-tour-package",
+                        pageName: "tour-package",
                         title: "Турпакеты",
                         ignore: true,
                     },
                     {
                         icon: "",
-                        pageName: "top-menu-visa",
+                        pageName: "visa",
                         title: "Визы",
                         ignore: true,
                     },
                     {
                         icon: "",
-                        pageName: "top-menu-cargo",
+                        pageName: "cargo",
                         title: "Карго",
                         ignore: true,
                     },
                     {
                         icon: "",
-                        pageName: "top-menu-return-back",
+                        pageName: "return-back",
                         title: "Возврать д/с",
                         ignore: true,
                     },
@@ -55,33 +55,33 @@ const menu = [
             },
             {
                 icon: "UsersIcon",
-                pageName: "top-menu-clients",
+                pageName: "clients",
                 title: "Клиенты",
                 ignore: true,
             },
             {
                 icon: "ActivityIcon",
-                pageName: "top-menu-apps",
+                pageName: "apps",
                 title: "Журнал звонков",
                 subMenu: [
                     {
                         icon: "UsersIcon",
-                        pageName: "top-menu-users-ss",
+                        pageName: "users-ss",
                         title: "Сделал заказ"
                     },
                     {
                         icon: "TrelloIcon",
-                        pageName: "top-menu-profile",
+                        pageName: "profile",
                         title: "Инфо по билетам,визам,турпакетам,карго",
                     },
                     {
                         icon: "InboxIcon",
-                        pageName: "top-menu-inbox",
+                        pageName: "inbox",
                         title: "Инфо о компании",
                     },
                     {
                         icon: "FolderIcon",
-                        pageName: "top-menu-file-manager",
+                        pageName: "file-manager",
                         title: "Поставил бронь",
                     },
                 ],
@@ -90,142 +90,142 @@ const menu = [
     },
     {
         icon: "LayoutIcon",
-        pageName: "top-menu-asd",
+        pageName: "asd",
         title: "Кассир",
         name: "cashier",
         subMenu: [
             {
                 icon: "",
-                pageName: "top-menu-cashier",
+                pageName: "cashier",
                 title: "Все заявки"
             },
             {
                 icon: "",
-                pageName: "top-menu-cashier-booked",
+                pageName: "cashier-booked",
                 title: "Заявки 'В обработке'"
             },
             {
                 icon: "",
-                pageName: "top-menu-cashier-paid",
+                pageName: "cashier-paid",
                 title: "Заявки 'Оплачено'"
             },
             {
                 icon: "",
-                pageName: "top-menu-cashier-transfer",
+                pageName: "cashier-transfer",
                 title: "Перенос прибыли"
             },
             {
                 icon: "",
-                pageName: "top-menu-cashier-exits",
+                pageName: "cashier-exits",
                 title: "Вывод средств"
             },
             {
                 icon: "",
-                pageName: "top-menu-cashier-exits-confirmeds",
+                pageName: "cashier-exits-confirmeds",
                 title: "Вывод средств подтверждённые"
             },
             {
                 icon: "",
-                pageName: "top-menu-cashier-enter",
+                pageName: "cashier-enter",
                 title: "Приход",
             },
             {
                 icon: "",
-                pageName: "top-menu-cashier-remainder",
+                pageName: "cashier-remainder",
                 title: "Остаток по кассом",
             },
             {
                 icon: "",
-                pageName: "top-menu-cashier-returns",
+                pageName: "cashier-returns",
                 title: "Возврат д/c",
             },
         ],
     },
     {
         icon: "InboxIcon",
-        pageName: "top-menu-components",
+        pageName: "components",
         title: "Бухгалтер",
         name: "accounter",
         subMenu: [
             {
                 icon: "",
-                pageName: "top-menu-accounter-orders",
+                pageName: "accounter-orders",
                 title: "Заказы"
             },
             {
                 icon: "",
-                pageName: "top-menu-accounter-sales",
+                pageName: "accounter-sales",
                 title: "Отчет по продажом",
             },
             {
                 icon: "",
-                pageName: "top-menu-accounter-enumeration",
+                pageName: "accounter-enumeration",
                 title: "Перечисление",
             },
         ],
     },
     {
         icon: "SidebarIcon",
-        pageName: "top-menu-forms",
+        pageName: "forms",
         title: "Директор",
         name: "director",
         subMenu: [
             {
                 icon: "",
-                pageName: "top-menu-director-report-diagrams",
+                pageName: "director-report-diagrams",
                 title: "Диаграммы продаж",
             },
             {
                 icon: "",
-                pageName: "top-menu-director-orders",
+                pageName: "director-orders",
                 title: "Заказы",
             },
             {
                 icon: "",
-                pageName: "top-menu-director-clients",
+                pageName: "director-clients",
                 title: "Клиенты",
             },
             {
                 icon: "",
-                pageName: "top-menu-director-exits",
+                pageName: "director-exits",
                 title: "Вывод средств",
             },
             {
                 icon: "",
-                pageName: "top-menu-director-return-back",
+                pageName: "director-return-back",
                 title: "Возврат ДС",
             }
         ],
     },
     {
         icon: "HardDriveIcon",
-        pageName: "top-menu-widgets",
+        pageName: "widgets",
         title: "Основные данные",
         name: "admin",
         subMenu: [
             {
                 icon: "",
-                pageName: "top-menu-tour-partners",
+                pageName: "tour-partners",
                 title: "Тур партнер",
             },
             {
                 icon: "",
-                pageName: "top-menu-visa-type",
+                pageName: "visa-type",
                 title: "Тип визы",
             },
             {
                 icon: "",
-                pageName: "top-menu-visa-partner",
+                pageName: "visa-partner",
                 title: "Виза партнер",
             },
             {
                 icon: "",
-                pageName: "top-menu-cashiers",
+                pageName: "cashiers",
                 title: "Касса",
             },
             {
                 icon: "",
-                pageName: "top-menu-users",
+                pageName: "users",
                 title: "Пользователи",
             },
         ],
