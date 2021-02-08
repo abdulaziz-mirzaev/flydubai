@@ -1,10 +1,15 @@
 <template>
-  <h2>All orders</h2>
+  <div class="content">
+    <h2>All orders</h2>
+    <router-link :to="{ name: 'accounter-edit', params: { id: 2 }  }">edit</router-link>
+    <br>
+    <router-link :to="{ name: 'accounter-orders-create' }">create</router-link>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "AllOrders"
+  name: 'AllOrders',
 };
 </script>
 

@@ -4,7 +4,7 @@ export default function () {
     user_id: null,
     username: null,
     email: null,
-    role: null,
+    role: 'client',
     isAuthenticated: false,
   };
 }

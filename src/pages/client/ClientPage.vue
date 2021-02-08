@@ -1,13 +1,15 @@
 <template>
   <div class="content">
-    <h2>Enumeration</h2>
+    <h2>Client Page</h2>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'AllOrders',
+  name: 'ClientPage',
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

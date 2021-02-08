@@ -13,12 +13,12 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some((route) => route.meta.protected)) {
-    if (!store.getters['auth/isAuthenticated']) {
+    if (store.getters['auth/isAuthenticated']) {
+      next();
+    } else {
       next({
         name: 'login',
       });
-    } else {
-      next();
     }
   } else {
     next();

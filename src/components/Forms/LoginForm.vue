@@ -6,6 +6,7 @@
       <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">
         Войти
       </h2>
+      <span class="text-red-700 mt-2" v-if="errors">{{ errors[0] }}</span>
       <div class="intro-x mt-2 text-gray-500 xl:hidden text-center">Несколько шагов для того, чтобы
         войти на ваш аккаунт
       </div>
@@ -16,12 +17,32 @@
           class="intro-x login__input input input--lg border border-gray-300 block"
           placeholder="Эл. почта или Имя пользователя"
         >
+        <div v-if="errors.username" class="text-red-700">
+          <ul class="list-none">
+            <li
+              v-for="(error, index) in errors.username"
+              :key="index"
+            >
+              {{ error }}
+            </li>
+          </ul>
+        </div>
         <input
           v-model="formData.password"
           type="password"
           class="intro-x login__input input input--lg border border-gray-300 block mt-4"
           placeholder="Пароль"
         >
+        <div v-if="errors.password_hash" class="text-red-700">
+          <ul class="list-none">
+            <li
+              v-for="(error, index) in errors.password_hash"
+              :key="index"
+            >
+              {{ error }}
+            </li>
+          </ul>
+        </div>
       </div>
       <!--      <div class="intro-x flex text-gray-700 dark:text-gray-600 text-xs sm:text-sm mt-4">-->
       <!--        <div class="flex items-center mr-auto">-->
@@ -32,6 +53,7 @@
       <!--      </div>-->
       <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
         <button
+          :disabled="!!isLoading"
           class="button button--lg w-full xl:w-32 text-white bg-theme-1 xl:mr-3 align-top"
           @click="onSubmit"
         >
@@ -57,6 +79,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'LoginForm',
   data() {
@@ -67,13 +91,44 @@ export default {
       },
     };
   },
+  computed: {
+    ...mapGetters({
+      errors: 'common/error',
+      isLoading: 'common/isLoading',
+      userRole: 'auth/userRole',
+    }),
+  },
   methods: {
     async onSubmit() {
-      await this.$store.dispatch('auth/login', {
-        username: this.formData.username,
-        password_hash: this.formData.password,
-      });
-      await this.$router.push({ name: 'home' });
+      try {
+        await this.$store.dispatch('auth/login', {
+          username: this.formData.username,
+          password_hash: this.formData.password,
+        });
+        switch (this.userRole) {
+          case 'operator':
+            await this.$router.push({ name: 'operator' });
+            break;
+
+          case 'accounter':
+            await this.$router.push({ name: 'accounter-orders' });
+            break;
+
+          case 'cashier':
+            await this.$router.push({ name: 'cashier' });
+            break;
+
+          case 'director':
+            await this.$router.push({ name: 'director' });
+            break;
+
+          default:
+            await this.$router.push({ name: 'home' });
+            break;
+        }
+      } catch (e) {
+        console.warn(e.message);
+      }
     },
   },
 };

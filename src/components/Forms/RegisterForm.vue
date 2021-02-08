@@ -78,13 +78,17 @@ export default {
     };
   },
   methods: {
-    onRegister() {
-      this.$store.dispatch('auth/register', {
-        email: this.formData.email,
-        password_hash: this.formData.password,
-        username: this.formData.username,
-      });
-      this.$router.push({ name: 'home' });
+    async onRegister() {
+      try {
+        await this.$store.dispatch('auth/register', {
+          email: this.formData.email,
+          password_hash: this.formData.password,
+          username: this.formData.username,
+        });
+        await this.$router.push({ name: 'home' });
+      } catch (e) {
+        console.log(e.message);
+      }
     },
   },
 };

@@ -1,11 +1,11 @@
 <template>
-  <h2>All orders Edit {{ id }}</h2>
+  <h2>All orders Edit {{ accounterId }}</h2>
 </template>
 
 <script>
 export default {
-  name: "Edit",
-  props: ["id"]
+  name: 'Edit',
+  props: ['accounterId'],
 };
 </script>
 

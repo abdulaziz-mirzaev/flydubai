@@ -352,49 +352,52 @@
       <!-- BEGIN: Account Menu -->
       <div class="intro-x dropdown w-8 h-8">
         <div
-          class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in scale-110"
+          class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in scale-110 bg-white"
         >
-          <img
-            alt="Midone Tailwind HTML Admin Template"
-            src="../assets/images/profile-1.jpg"
-          />
+          <span
+            v-if="userName"
+            class="rounded-full font-bold avatar"
+          >
+            {{ userName[0].toUpperCase() || 'A' }}
+          </span>
         </div>
-        <div class="dropdown-box w-56">
+        <div v-if="isAuthenticated" class="dropdown-box w-56">
           <div
             class="dropdown-box__content box bg-theme-38 dark:bg-dark-6 text-white"
           >
             <div class="p-4 border-b border-theme-40 dark:border-dark-3">
-              <div class="font-medium">Tom Cruise</div>
+              <div class="font-medium">{{ userName || 'Default Username'}}</div>
+              <div class="font-medium">{{ userEmail || 'Default User Email'}}</div>
               <div class="text-xs text-theme-41 mt-0.5 dark:text-gray-600">
-                Software Engineer
+                {{ userRole || 'Default User Role'}}
               </div>
             </div>
-            <div class="p-2">
-              <a
-                href=""
-                class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"
-              >
-                <i data-feather="user" class="w-4 h-4 mr-2"></i> Profile
-              </a>
-              <a
-                href=""
-                class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"
-              >
-                <i data-feather="edit" class="w-4 h-4 mr-2"></i> Add Account
-              </a>
-              <a
-                href=""
-                class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"
-              >
-                <i data-feather="lock" class="w-4 h-4 mr-2"></i> Reset Password
-              </a>
-              <a
-                href=""
-                class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"
-              >
-                <i data-feather="help-circle" class="w-4 h-4 mr-2"></i> Help
-              </a>
-            </div>
+            <!--            <div class="p-2">-->
+            <!--              <a-->
+            <!--                href=""-->
+            <!--                class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"-->
+            <!--              >-->
+            <!--                <i data-feather="user" class="w-4 h-4 mr-2"></i> Profile-->
+            <!--              </a>-->
+            <!--              <a-->
+            <!--                href=""-->
+            <!--                class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"-->
+            <!--              >-->
+            <!--                <i data-feather="edit" class="w-4 h-4 mr-2"></i> Add Account-->
+            <!--              </a>-->
+            <!--              <a-->
+            <!--                href=""-->
+            <!--                class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"-->
+            <!--              >-->
+            <!--                <i data-feather="lock" class="w-4 h-4 mr-2"></i> Reset Password-->
+            <!--              </a>-->
+            <!--              <a-->
+            <!--                href=""-->
+            <!--                class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"-->
+            <!--              >-->
+            <!--                <i data-feather="help-circle" class="w-4 h-4 mr-2"></i> Help-->
+            <!--              </a>-->
+            <!--            </div>-->
             <div class="p-2 border-t border-theme-40 dark:border-dark-3">
               <a
                 class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md cursor-pointer"
@@ -413,8 +416,23 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'HeaderApp',
+  data() {
+    return {
+      dropdownOpen: false,
+    };
+  },
+  computed: {
+    ...mapGetters({
+      isAuthenticated: 'auth/isAuthenticated',
+      userRole: 'auth/userRole',
+      userName: 'auth/userName',
+      userEmail: 'auth/userEmail',
+    }),
+  },
   methods: {
     async onLogout() {
       await this.$store.dispatch('auth/logout');
@@ -424,4 +442,11 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+  .avatar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+</style>
