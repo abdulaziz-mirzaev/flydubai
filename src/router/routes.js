@@ -28,6 +28,14 @@ const routes = [
     },
   },
   {
+    path: '*',
+    name: 'error',
+    meta: {
+      shell: EmptyShell,
+    },
+    component: () => import('../pages/error-page/ErrorPage'),
+  },
+  {
     path: '/client',
     name: 'client',
     meta: {
