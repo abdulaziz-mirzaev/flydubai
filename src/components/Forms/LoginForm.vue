@@ -95,6 +95,7 @@ export default {
     ...mapGetters({
       errors: 'common/error',
       isLoading: 'common/isLoading',
+      userRole: 'auth/userRole',
     }),
   },
   methods: {
@@ -104,7 +105,19 @@ export default {
           username: this.formData.username,
           password_hash: this.formData.password,
         });
-        await this.$router.push({ name: 'home' });
+        switch (this.userRole) {
+          case 'operator':
+            await this.$router.push({ name: 'operator' });
+            break;
+
+          case 'accounter':
+            await this.$router.push({ name: 'accounter-orders' });
+            break;
+
+          default:
+            await this.$router.push({ name: 'home' });
+            break;
+        }
       } catch (e) {
         console.warn(e.message);
       }

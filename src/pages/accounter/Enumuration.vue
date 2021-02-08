@@ -1,10 +1,12 @@
 <template>
-  <h2>Enumeration</h2>
+  <div class="content">
+    <h2>Enumeration</h2>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "AllOrders"
+  name: 'AllOrders',
 };
 </script>
 

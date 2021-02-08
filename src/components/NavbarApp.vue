@@ -21,7 +21,7 @@
             />
           </div>
         </a>
-      <!--   BEGIN: Second Child    -->
+        <!--   BEGIN: Second Child    -->
         <ul v-if="menuItem.subMenu">
           <li
             v-for="(subMenu, subMenuKey) in menuItem.subMenu"
@@ -61,7 +61,7 @@
                 </a>
               </li>
             </ul>
-          <!-- END: Third Child -->
+            <!-- END: Third Child -->
           </li>
         </ul>
         <!-- END: Second Child -->
@@ -72,39 +72,39 @@
 </template>
 
 <script>
-import menu from "../menu";
+import menu from '../menu';
 import { ChevronDownIcon, ActivityIcon, ZapIcon } from 'vue-feather-icons';
-import {linkTo, nestedMenu} from '../menu/menu-config';
+import { linkTo, nestedMenu } from '../menu/menu-config';
 
 export default {
-  name: "NavbarApp",
+  name: 'NavbarApp',
   components: { ActivityIcon, ChevronDownIcon, ZapIcon },
   data() {
     return {
       menu,
-    }
+    };
   },
   computed: {
     role() {
-      return this.$store.getters["auth/userRole"];
+      return this.$store.getters['auth/userRole'];
     },
     menuByRole() {
-      if ( this.role !== 'admin' ) {
+      if (this.role !== 'admin') {
         const roledMenu = this.menu.filter((menu) => menu.name === this.role);
         return roledMenu[0].subMenu;
       }
       return menu;
     },
     menus() {
-      return nestedMenu(this.menuByRole, this.$route)
-    }
+      return nestedMenu(this.menuByRole, this.$route);
+    },
   },
   methods: {
-    linkTo
+    linkTo,
   },
   created() {
     console.log(this.role);
-  }
+  },
 };
 </script>
 

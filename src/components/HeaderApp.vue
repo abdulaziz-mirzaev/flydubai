@@ -354,12 +354,12 @@
         <div
           class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in scale-110 bg-white"
         >
-          <!--          <img-->
-          <!--            alt="Midone Tailwind HTML Admin Template"-->
-          <!--            src="../assets/images/profile-1.jpg"-->
-          <!--          />-->
-          <span v-if="userName"
-                class="rounded-full font-bold avatar">{{ userName[0].toUpperCase() }}</span>
+          <span
+            v-if="userName"
+            class="rounded-full font-bold avatar"
+          >
+            {{ userName[0].toUpperCase() || 'A' }}
+          </span>
         </div>
         <div v-if="isAuthenticated" class="dropdown-box w-56">
           <div
@@ -420,6 +420,11 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'HeaderApp',
+  data() {
+    return {
+      dropdownOpen: false,
+    };
+  },
   computed: {
     ...mapGetters({
       isAuthenticated: 'auth/isAuthenticated',
