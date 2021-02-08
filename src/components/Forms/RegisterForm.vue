@@ -78,13 +78,13 @@ export default {
     };
   },
   methods: {
-    async onRegister() {
-      await this.$store.dispatch('auth/register', {
+    onRegister() {
+      this.$store.dispatch('auth/register', {
         email: this.formData.email,
         password_hash: this.formData.password,
         username: this.formData.username,
       });
-      await this.$router.push({ name: 'home' });
+      this.$router.push({ name: 'home' });
     },
   },
 };

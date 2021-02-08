@@ -16,6 +16,7 @@ const routes = [
     name: 'home',
     meta: {
       shell: MainShell,
+      protected: true,
     },
     component: HomePage,
   },

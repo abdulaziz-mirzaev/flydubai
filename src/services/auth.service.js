@@ -24,10 +24,11 @@ const signUp = async formData => {
 };
 
 const me = async token => {
-  await request({
+  return await request({
     url: 'user/get',
     method: 'post',
-    data: token,
+    data: { token },
+    token,
   });
 };
 
