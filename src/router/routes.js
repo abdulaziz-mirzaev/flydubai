@@ -44,7 +44,7 @@ const routes = [
     },
     component: () => import('../pages/main/client/Client'),
     beforeEnter: (to, from, next) => {
-      if (userRole === 'client') {
+      if (userRole === 'operator') {
         next();
       } else {
         next({

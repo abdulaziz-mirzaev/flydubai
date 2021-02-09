@@ -10,14 +10,14 @@ const getAll = async (resourceName) => {
   const token = store.getters["auth/userToken"];
   const { data: fields } = await getInfo(resourceName);
   if (fields.extraFields) {
-    await request({
+    return await request({
       url: `${resourceName}?expand=${fields.extraFields}`,
       method: 'get',
       data: {},
       token: token
     });
   } else {
-    await request({
+    return await request({
       url: `${resourceName}`,
       method: 'get',
       data: {},
