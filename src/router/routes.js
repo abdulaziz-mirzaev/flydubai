@@ -44,7 +44,7 @@ const routes = [
     },
     component: () => import('../pages/main/client/Client'),
     beforeEnter: (to, from, next) => {
-      if (userRole === 'client') {
+      if (userRole === 'operator') {
         next();
       } else {
         next({
@@ -101,7 +101,7 @@ const routes = [
       shell: MainShell,
       protected: true,
     },
-    component: () => import('../pages/cashier/CashierPage'),
+    component: () => import('../pages/cashier/all-orders/Index'),
     beforeEnter: (to, from, next) => {
       if (userRole === 'cashier' || userRole === 'admin') {
         next();
