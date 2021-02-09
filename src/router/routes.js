@@ -4,7 +4,8 @@ import EmptyShell from '../shells/EmptyShell';
 
 import LoginPage from '../pages/auth/LoginPage';
 import RegisterPage from '../pages/auth/RegisterPage';
-import HomePage from '../pages/HomePage';
+import Dashboard from '../pages/Dashboard';
+import TopMenu from '../pages/TopMenu';
 
 const userRole = store.getters['auth/userRole'];
 
@@ -16,7 +17,8 @@ const routes = [
       shell: MainShell,
       protected: false,
     },
-    component: HomePage,
+    redirect: '',
+    component: TopMenu,
     beforeEnter: (to, from, next) => {
       if (userRole === 'admin') {
         next();
@@ -26,6 +28,23 @@ const routes = [
         });
       }
     },
+    children: [
+      {
+        path: '',
+        name: 'top-menu-dashboard',
+        component: Dashboard,
+      },
+      {
+        path: '/profile',
+        name: 'top-menu-profile',
+        component: () => import('../pages/Profile'),
+      },
+      {
+        path: '/resetPassword',
+        name: 'resetPassword',
+        component: () => import('../pages/ChangePassword'),
+      },
+    ],
   },
   {
     path: '*',
@@ -155,7 +174,7 @@ const routes = [
     component: () => import('../pages/accounter/all-orders/Index'),
   },
   {
-    path: '/accounter/create',
+    path: '/accounter/orders/create',
     name: 'accounter-orders-create',
     meta: {
       shell: MainShell,
@@ -164,13 +183,13 @@ const routes = [
     component: () => import('../pages/accounter/all-orders/Create'),
   },
   {
-    path: '/accounter/edit/:id',
-    name: 'accounter-edit',
+    path: '/accounter/orders/edit/:id',
+    name: 'accounter-orders-edit',
     meta: {
       shell: MainShell,
       protected: true,
     },
-    props: (route => ({ accounterId: route.params.id })),
+    props: (route => ({ orderId: route.params.id })),
     component: () => import('../pages/accounter/all-orders/Edit'),
   },
   {

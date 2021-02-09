@@ -123,7 +123,7 @@ export default {
             break;
 
           default:
-            await this.$router.push({ name: 'home' });
+            await this.$router.push({ name: 'top-menu-dashboard' });
             break;
         }
       } catch (e) {

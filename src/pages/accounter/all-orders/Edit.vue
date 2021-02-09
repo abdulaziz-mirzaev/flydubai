@@ -1,36 +1,38 @@
 <template>
   <div class="content">
-    id: {{ accounterId }}
-    <form-builder-app :schema="schema" :model="model" :options="formOptions" @submit="onSubmit" />
+    id: {{ orderId }}
+    <spinner-app v-if="isLoading" />
+    <form-builder-app v-else :schema="schema" :model="model" :options="formOptions" @submit="onSubmit" />
   </div>
 </template>
 
 <script>
 import VueTypes from 'vue-types';
-import { mapGetters } from 'vuex';
+import { getOne } from '@/services/api.service';
 import VueFormGenerator from 'vue-form-generator';
 import FormBuilderApp from '@/components/FormBuilderApp';
-import { edit } from '../../../services/api.service';
-// import { getOne } from '@/services/api.service';
+import SpinnerApp from '@/components/SpinnerApp';
 
 export default {
   name: 'Edit',
   props: {
-    accounterId: VueTypes.any.isRequired,
+    orderId: VueTypes.any.isRequired,
   },
   components: {
     FormBuilderApp,
+    SpinnerApp,
   },
   data() {
     return {
+      isLoading: false,
       model: {
-        id: 1,
-        number: 'John Doe',
-        password: 'J0hnD03!x4',
-        age: 35,
-        skills: ['Javascript', 'VueJS'],
-        email: 'john.doe@gmail.com',
-        status: true,
+        id: '',
+        number: '',
+        password: '',
+        age: null,
+        skills: [],
+        email: '',
+        status: false,
       },
       schema: {
         fields: [
@@ -110,21 +112,21 @@ export default {
       },
     };
   },
-  computed: {
-    ...mapGetters({
-      userToken: 'auth/userToken',
-    }),
+  async created() {
+    this.isLoading = true;
+    try {
+      const { data: order } = await getOne('order', this.orderId);
+      this.isLoading = false;
+      console.log(order);
+    } catch (e) {
+      this.isLoading = false;
+    }
   },
-  // async created() {
-  //   const { data: order } = await getOne('order', this.accounterId, this.userToken);
-  //   console.log(order);
-  // },
   methods: {
-    onSubmit() {
-      edit('order', this.model.id, this.model);
+    async onSubmit() {
+      // edit('order', this.model.id, this.model);
+      await this.$router.push({ name: 'accounter-orders' });
     },
   },
 };
 </script>
-
-<style scoped></style>
