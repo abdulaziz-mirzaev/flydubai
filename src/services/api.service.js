@@ -63,9 +63,11 @@ const create = async (resourceName, form) => {
 };
 
 const remove = async (resourceName, id) => {
+  const token = store.getters["auth/userToken"];
   await request({
     url: `${resourceName}/delete/${id}`,
     method: 'post',
+    token
   });
 };
 

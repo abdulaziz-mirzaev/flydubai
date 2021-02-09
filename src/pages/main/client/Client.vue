@@ -80,7 +80,10 @@
 <script>
   import {ChevronDownIcon, FileTextIcon, PrinterIcon} from "vue-feather-icons";
   import Tabulator from 'tabulator-tables';
-  import {getAll, getInfo} from "../../../services/api.service";
+  import {getAll, getInfo, remove} from "../../../services/api.service";
+  import $ from "cash-dom";
+  import feather from "feather-icons";
+  import router from "@/router"
 
   export default {
     components: {
@@ -135,12 +138,41 @@
           {
             field: "clientType.name",
             title: titles.client_type_id
+          },
+          {
+            field: "actions",
+            title: "Действия",
+            formatter(cell) {
+              const id = cell.getData().id;
+              const a = $(`<div class="flex lg:justify-center items-center">
+                <a href="javascript:;"  class="flex items-center mr-3">
+                  <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit
+                </a>
+                <a class="flex items-center text-theme-6 mr-3">
+                  <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete
+                </a>
+                <a class="flex items-center" >
+                  <i data-feather="eye" class="w-4 h-4 mr-1"></i> View
+                </a>
+              </div>`);
+
+              $(a[0].children[1]).on('click', async () => {
+                await remove('client',id);
+                await tabulator.deleteRow(id);
+              });
+
+              $(a[0].children[0]).on('click', () => {
+                router.push({ path: '/client/edit', params: { id: '12' } })
+              });
+
+              return a[0];
+            }
           }
 
         ]
 
-        this.tabulator = new Tabulator(this.tableRef, {
-          data: data,
+        const tabulator = new Tabulator(this.tableRef, {
+          data,
           pagination: "local",
           paginationSize: 20,
           paginationSizeSelector: [10, 20, 30, 40],
@@ -150,7 +182,12 @@
           headerHozAlign: "center",
           cellHozAlign: "center",
           cellVertAlign: "middle",
-          columns: columns
+          columns,
+          renderComplete() {
+            feather.replace({
+              "stroke-width": 1.5,
+            });
+          },
         });
       }
     },
