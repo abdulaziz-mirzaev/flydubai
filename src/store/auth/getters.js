@@ -17,3 +17,7 @@ export function userName(state) {
 export function userEmail(state) {
   return state.email;
 }
+
+export function userToken(state) {
+  return state.userToken;
+}
