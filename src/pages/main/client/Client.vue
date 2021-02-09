@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-        <a class="button text-white bg-theme-1 shadow-md mr-2" @click="testAction">
+        <a class="button text-white bg-theme-1 shadow-md mr-2">
           Создать Новый Клиент
         </a>
       </div>
@@ -19,7 +19,6 @@
         <div class="flex ml-auto mt-5 sm:mt-0">
           <button
             class="button w-1/2 sm:w-auto flex items-center border text-gray-700 mr-2 dark:bg-dark-5 dark:text-gray-300"
-            @click="onPrint"
           >
             <PrinterIcon class="w-4 h-4 mr-2"/> Print
           </button>
@@ -37,7 +36,6 @@
                 <a
                   href="javascript:;"
                   class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
-                  @click="onExportCsv"
                 >
                   <i data-feather="file-text" class="w-4 h-4 mr-2"></i> Export
                   CSV
@@ -45,7 +43,6 @@
                 <a
                   href="javascript:;"
                   class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
-                  @click="onExportJson"
                 >
                   <i data-feather="file-text" class="w-4 h-4 mr-2"></i> Export
                   JSON
@@ -53,7 +50,6 @@
                 <a
                   href="javascript:;"
                   class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
-                  @click="onExportXlsx"
                 >
                   <i data-feather="file-text" class="w-4 h-4 mr-2"></i> Export
                   XLSX
@@ -61,7 +57,6 @@
                 <a
                   href="javascript:;"
                   class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
-                  @click="onExportHtml"
                 >
                   <i data-feather="file-text" class="w-4 h-4 mr-2"></i> Export
                   HTML
@@ -95,22 +90,29 @@
     data() {
       return {
         tabulator: null,
+        tabulatorData: [
+          {id: 1, name: 'Abdulaziz'},
+          {id: 2, name: 'Abdulloh'}
+        ],
       }
     },
     computed: {
       tableRef() {
         return this.$refs.tableRef;
-      }
+      },
     },
     methods: {
-      initTabulator() {
-        this.tabulator = new Tabulator(this.tableRef, {
-          data: getAll('client',this.$store.getters["auth/userRole"])
-        })
-      }
+      
     },
-    mounted() {
-      console.log(this.tableRef);
+    async created() {
+      const data = await getAll('client');
+      if ( data ) {
+        this.tabulator = new Tabulator(this.tableRef, {
+          data: data,
+          autoColumns: true,
+        });
+        console.warn(data, 'this is data');
+      }
     }
   }
 </script>

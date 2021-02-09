@@ -1,46 +1,47 @@
 import { request } from './core.service';
+import store from '../store';
 
-const getInfo = async (resourceName, token) =>
-  request({ url: `${resourceName}/info`, method: 'get', token });
+const getInfo = async (resourceName) => {
+  const token = store.getters["auth/userToken"];
+  return await request({ url: `${resourceName}/info`, method: 'get', data: {}, token: token })
+};
 
-const getAll = async (resourceName, token) => {
-  const { data: fields } = await getInfo(resourceName, token);
+const getAll = async (resourceName) => {
+  const token = store.getters["auth/userToken"];
+  const { data: fields } = await getInfo(resourceName);
   if (fields.extraFields) {
     await request({
       url: `${resourceName}?expand=${fields.extraFields}`,
       method: 'get',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      data: {},
+      token: token
     });
   } else {
     await request({
       url: `${resourceName}`,
       method: 'get',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      data: {},
+      token: token
     });
   }
 };
 
-const getOne = async (resourceName, id, token) => {
-  const { data: fields } = await getInfo(resourceName, token);
+const getOne = async (resourceName, id) => {
+  const token = store.getters["auth/userToken"];
+  const { data: fields } = await getInfo(resourceName);
   if (fields.extraFields) {
     await request({
       url: `${resourceName}/view/${id}?expand=${fields.extraFields}`,
       method: 'get',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      data: {},
+      token: token
     });
   } else {
     await request({
       url: `${resourceName}/view/${id}`,
       method: 'get',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      data: {},
+      token: token
     });
   }
 };

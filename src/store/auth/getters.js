@@ -6,6 +6,10 @@ export function userId(state) {
   return state.user_id;
 }
 
+export function userToken(state) {
+  return state.token;
+}
+
 export function userRole(state) {
   return state.role;
 }

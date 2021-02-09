@@ -5,6 +5,7 @@ import EmptyShell from '../shells/EmptyShell';
 import LoginPage from '../pages/auth/LoginPage';
 import RegisterPage from '../pages/auth/RegisterPage';
 import HomePage from '../pages/HomePage';
+import Client from '../pages/main/client/Client';
 
 const userRole = store.getters['auth/userRole'];
 
@@ -36,16 +37,6 @@ const routes = [
     },
     component: Client,
   },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ '../pages/OperatorPage.vue'),
-  },
-
   //region Auth Pages
   {
     path: '/login',
