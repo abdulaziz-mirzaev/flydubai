@@ -43,6 +43,15 @@ const routes = [
       protected: true,
     },
     component: () => import('../pages/main/client/Client'),
+    beforeEnter: (to, from, next) => {
+      if (userRole === 'client') {
+        next();
+      } else {
+        next({
+          path: '/',
+        });
+      }
+    },
   },
   //region Auth Pages
   {
