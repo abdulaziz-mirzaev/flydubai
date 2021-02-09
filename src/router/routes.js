@@ -5,7 +5,6 @@ import EmptyShell from '../shells/EmptyShell';
 import LoginPage from '../pages/auth/LoginPage';
 import RegisterPage from '../pages/auth/RegisterPage';
 import HomePage from '../pages/HomePage';
-import Client from '../pages/main/client/Client';
 
 const userRole = store.getters['auth/userRole'];
 
@@ -29,13 +28,30 @@ const routes = [
     },
   },
   {
+    path: '*',
+    name: 'error',
+    meta: {
+      shell: EmptyShell,
+    },
+    component: () => import('../pages/error-page/ErrorPage'),
+  },
+  {
     path: '/client',
     name: 'client',
     meta: {
       shell: MainShell,
       protected: true,
     },
-    component: Client,
+    component: () => import('../pages/main/client/Client'),
+    beforeEnter: (to, from, next) => {
+      if (userRole === 'client') {
+        next();
+      } else {
+        next({
+          path: '/',
+        });
+      }
+    },
   },
   //region Auth Pages
   {
