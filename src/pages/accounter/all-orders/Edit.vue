@@ -77,7 +77,7 @@ export default {
             model: 'nds',
             placeholder: 'User\'s e-mail address',
             required: true,
-            validator: VueFormGenerator.validators.string,
+            validator: VueFormGenerator.validators.number,
           },
           {
             type: 'input',
@@ -125,6 +125,10 @@ export default {
             ],
             default: 'BOOKED',
           },
+          {
+            buttonText: 'Submit',
+            validateBeforeSubmit: true,
+          },
         ],
       },
       formOptions: {
@@ -136,7 +140,12 @@ export default {
   async created() {
     this.isLoading = true;
     try {
-      const { data: { number, operator_id, count, summ, nds, summ_terminal, payment_type, status } } = await getOne('order', this.orderId);
+      const {
+        data: {
+          number, operator_id, count, summ, nds, summ_terminal, payment_type, status,
+        },
+      } = await getOne('order', this.orderId);
+
       this.model.number = number;
       this.model.operator_id = operator_id;
       this.model.count = count;
