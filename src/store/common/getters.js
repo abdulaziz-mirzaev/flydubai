@@ -5,3 +5,7 @@ export function isLoading(state) {
 export function error(state) {
   return state.error;
 }
+
+export function deleteModal(state) {
+  return state.deleteModal;
+}

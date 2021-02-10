@@ -3,14 +3,9 @@
         <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
             <h2 class="text-lg font-medium mr-auto">Список: Клиентов</h2>
             <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-                <button class="button text-white bg-theme-1 shadow-md mr-2" @click="$router.push('/operator/client/create')">
+                <button class="button text-white bg-theme-1 shadow-md mr-2" @click="$router.push('/client/create')">
                     Создать Новый Клиент
                 </button>
-            </div>
-            <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-                <a class="button text-white bg-theme-1 shadow-md mr-2">
-                    Создать Новый Клиент
-                </a>
             </div>
         </div>
         <!-- BEGIN: HTML Table Data -->
@@ -18,45 +13,51 @@
             <div class="flex flex-col sm:flex-row sm:items-end xl:items-start">
                 <div class="flex ml-auto mt-5 sm:mt-0">
                     <button
-                            class="button w-1/2 sm:w-auto flex items-center border text-gray-700 mr-2 dark:bg-dark-5 dark:text-gray-300"
+                        class="button w-1/2 sm:w-auto flex items-center border text-gray-700 mr-2 dark:bg-dark-5 dark:text-gray-300"
+                        @click="onPrint"
                     >
-                        <PrinterIcon class="w-4 h-4 mr-2"/> Print
+                        <i data-feather="printer" class="w-4 h-4 mr-2"></i> Print
                     </button>
                     <div class="dropdown w-1/2 sm:w-auto">
                         <button
-                                class="dropdown-toggle button w-full sm:w-auto flex items-center border text-gray-700 dark:bg-dark-5 dark:text-gray-300"
+                            class="dropdown-toggle button w-full sm:w-auto flex items-center border text-gray-700 dark:bg-dark-5 dark:text-gray-300"
                         >
-                            <FileTextIcon class="w-4 h-4 mr-2"/> Print
-                            <ChevronDownIcon
-                                    class="w-4 h-4 ml-auto sm:ml-2"
-                            />
+                            <i data-feather="file-text" class="w-4 h-4 mr-2"></i> Export
+                            <i
+                                data-feather="chevron-down"
+                                class="w-4 h-4 ml-auto sm:ml-2"
+                            ></i>
                         </button>
                         <div class="dropdown-box w-40">
                             <div class="dropdown-box__content box dark:bg-dark-1 p-2">
                                 <a
-                                        href="javascript:;"
-                                        class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
+                                    href="javascript:;"
+                                    class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
+                                    @click="onExportCsv"
                                 >
                                     <i data-feather="file-text" class="w-4 h-4 mr-2"></i> Export
                                     CSV
                                 </a>
                                 <a
-                                        href="javascript:;"
-                                        class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
+                                    href="javascript:;"
+                                    class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
+                                    @click="onExportJson"
                                 >
                                     <i data-feather="file-text" class="w-4 h-4 mr-2"></i> Export
                                     JSON
                                 </a>
                                 <a
-                                        href="javascript:;"
-                                        class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
+                                    href="javascript:;"
+                                    class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
+                                    @click="onExportXlsx"
                                 >
                                     <i data-feather="file-text" class="w-4 h-4 mr-2"></i> Export
                                     XLSX
                                 </a>
                                 <a
-                                        href="javascript:;"
-                                        class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
+                                    href="javascript:;"
+                                    class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
+                                    @click="onExportHtml"
                                 >
                                     <i data-feather="file-text" class="w-4 h-4 mr-2"></i> Export
                                     HTML
@@ -68,36 +69,39 @@
             </div>
             <div class="">
                 <div
-                        id="tabulator"
-                        ref="tableRef"
-                        class="mt-5 table-report table-report--tabulator"
+                    id="tabulator"
+                    ref="tableRef"
+                    class="mt-5 table-report table-report--tabulator"
                 ></div>
             </div>
         </div>
+        <DeleteModal v-if="$store.getters['common/deleteModal']"/>
     </div>
 </template>
 
 <script>
   import {ChevronDownIcon, FileTextIcon, PrinterIcon} from "vue-feather-icons";
   import Tabulator from 'tabulator-tables';
-  import {getAll, getInfo, remove} from "../../../services/api.service";
+  import {getAll, getGlobals, getInfo, remove} from "../../../services/api.service";
   import $ from "cash-dom";
   import feather from "feather-icons";
-  import router from "@/router"
+  import router from '@/router';
+  import xlsx from 'xlsx';
+  import DeleteModal from "@/components/DeleteModal";
 
   export default {
     components: {
-      PrinterIcon, FileTextIcon, ChevronDownIcon
+      // eslint-disable-next-line vue/no-unused-components
+      PrinterIcon, FileTextIcon, ChevronDownIcon, DeleteModal
     },
 
     name: 'Client',
 
     data() {
       return {
-        tabulator: null,
-      }
+        tabulator: {},
+      };
     },
-
     computed: {
       tableRef() {
         return this.$refs.tableRef;
@@ -106,28 +110,21 @@
 
     methods: {
       async initTabulator() {
-        const { data } = await getAll('client');
-        const { data: {attributes: titles} } = await getInfo('client');
+        const {data} = await getAll('client');
+        const {data: {attributes: titles} } = await getInfo('client');
+        const {data: {clientTypes} } = await getGlobals();
+
+        console.log(clientTypes);
 
         const columns = [
           {
             field: "id",
-            title: titles.id,
             minWidth: 100,
-            width: 150
+            width: 150,
           },
-          {
-            field: "first_name",
-            title: titles.first_name
-          },
-          {
-            field: "last_name",
-            title: titles.last_name,
-          },
-          {
-            field: "patronym",
-            title: titles.patronym
-          },
+          'first_name',
+          'last_name',
+          'patronym',
           {
             field: "passport_serial",
             title: "Пасспорт",
@@ -137,11 +134,15 @@
           },
           {
             field: "clientType.name",
-            title: titles.client_type_id
+            title: titles.client_type_id,
+            headerFilter: "select",
+            headerFilterParams: Object.values(clientTypes)
           },
           {
             field: "actions",
             title: "Действия",
+            print: false,
+            download: false,
             formatter(cell) {
               const id = cell.getData().id;
               const a = $(`<div class="flex lg:justify-center items-center">
@@ -157,21 +158,39 @@
               </div>`);
 
               $(a[0].children[1]).on('click', async () => {
-                await remove('client',id);
-                await tabulator.deleteRow(id);
+                await remove('client', id);
+                await this.table.deleteRow(id)
+
               });
 
               $(a[0].children[0]).on('click', () => {
-                router.push({ path: '/client/edit', params: { id: '12' } })
+                router.push({path: '/client/edit', props: {id}})
               });
 
               return a[0];
             }
           }
 
-        ]
+        ];
 
-        const tabulator = new Tabulator(this.tableRef, {
+        for (let [index, column] of columns.entries()) {
+
+          if (typeof column == 'string') {
+            columns[index] = {
+              field: column
+            }
+          }
+
+          if (!columns[index].title) {
+            columns[index].title = titles[columns[index].field]
+          }
+
+          if (!columns[index].headerFilter && columns[index].field !== 'actions') {
+            columns[index].headerFilter = 'input';
+          }
+        }
+
+        this.tabulator = new Tabulator(this.tableRef, {
           data,
           pagination: "local",
           paginationSize: 20,
@@ -182,6 +201,10 @@
           headerHozAlign: "center",
           cellHozAlign: "center",
           cellVertAlign: "middle",
+          initialSort:[
+            {column:"id", dir:"desc"}
+          ],
+          headerFilterPlaceholder:"Поиск...",
           columns,
           renderComplete() {
             feather.replace({
@@ -189,7 +212,35 @@
             });
           },
         });
-      }
+      },
+
+      // Export
+      onExportCsv() {
+        this.tabulator.download("csv", "data.csv");
+      },
+
+      onExportJson() {
+        this.tabulator.download("json", "data.json");
+      },
+
+      onExportXlsx() {
+        window.XLSX = xlsx;
+        this.tabulator.download("xlsx", "data.xlsx", {
+          sheetName: "Products",
+        });
+      },
+
+      onExportHtml() {
+        this.tabulator.download("html", "data.html", {
+          style: true,
+        });
+
+      },
+
+      // Print
+      onPrint() {
+        this.tabulator.print();
+      },
     },
 
     created() {

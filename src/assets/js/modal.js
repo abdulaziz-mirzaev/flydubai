@@ -1,3 +1,5 @@
+import cash from "cash-dom";
+
 (function (cash) {
     // Show or hide global event listener
     let events = [];
@@ -191,4 +193,5 @@
             onHide(this, callback);
         }
     };
+
 })(cash);

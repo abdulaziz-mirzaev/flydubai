@@ -19,7 +19,7 @@ import "./feather";
 // import "./maps";
 // import "./chat";
 // import "./dropdown";
-// import "./modal";
+import "./modal";
 // import "./show-modal";
 // import "./show-dropdown";
 // import "./tab";

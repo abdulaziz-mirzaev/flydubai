@@ -1,6 +1,10 @@
 import { request } from './core.service';
 import store from '../store';
 
+const getGlobals = async () => {
+  return await request({ url: `globals`, method: 'get', data: {} });
+};
+
 const getInfo = async (resourceName) => {
   const token = store.getters["auth/userToken"];
   return await request({ url: `${resourceName}/info`, method: 'get', data: {}, token: token })
@@ -71,4 +75,4 @@ const remove = async (resourceName, id) => {
   });
 };
 
-export { getAll, getOne, getInfo, edit, create, remove };
+export { getGlobals, getAll, getOne, getInfo, edit, create, remove };
