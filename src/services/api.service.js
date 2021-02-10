@@ -47,27 +47,31 @@ const getOne = async (resourceName, id) => {
 };
 
 const edit = async (resourceName, id, form) => {
+  const token = store.getters['auth/userToken'];
   await request({
     url: `${resourceName}/update/${id}`,
     method: 'post',
     data: form,
+    token,
   });
 };
 
 const create = async (resourceName, form) => {
+  const token = store.getters['auth/userToken'];
   await request({
     url: `${resourceName}/create`,
     method: 'post',
     data: form,
+    token,
   });
 };
 
 const remove = async (resourceName, id) => {
-  const token = store.getters["auth/userToken"];
+  const token = store.getters['auth/userToken'];
   await request({
     url: `${resourceName}/delete/${id}`,
     method: 'post',
-    token
+    token,
   });
 };
 

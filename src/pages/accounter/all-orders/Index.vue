@@ -8,7 +8,7 @@
           tag="button"
           class="button text-white bg-theme-1 shadow-md mr-2"
         >
-          Создать Новый Клиент
+          Создать Новый Заказ
         </router-link>
       </div>
     </div>
