@@ -10,8 +10,7 @@ import VueTypes from 'vue-types';
 import { mapGetters } from 'vuex';
 import VueFormGenerator from 'vue-form-generator';
 import FormBuilderApp from '@/components/FormBuilderApp';
-import { edit } from '../../../services/api.service';
-// import { getOne } from '@/services/api.service';
+import { getOne } from '../../../services/api.service';
 
 export default {
   name: 'Edit',
@@ -115,13 +114,14 @@ export default {
       userToken: 'auth/userToken',
     }),
   },
-  // async created() {
-  //   const { data: order } = await getOne('order', this.accounterId, this.userToken);
-  //   console.log(order);
-  // },
+  async created() {
+    console.log(this.accounterId);
+    const order = await getOne('order', this.accounterId);
+    console.log(order);
+  },
   methods: {
     onSubmit() {
-      edit('order', this.model.id, this.model);
+      console.log('model to update --->', this.model);
     },
   },
 };

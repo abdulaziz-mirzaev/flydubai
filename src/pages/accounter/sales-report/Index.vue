@@ -8,8 +8,13 @@
 </template>
 
 <script>
+import { getOne } from '../../../services/api.service';
+
 export default {
   name: 'AllOrders',
+  async created() {
+    await getOne('order', 279);
+  },
 };
 </script>
 
